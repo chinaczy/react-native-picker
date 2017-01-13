@@ -131,6 +131,11 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
 
     @ReactMethod
     public void _init(ReadableMap options) {
+        if(dialog != null )
+        {
+            dialog.dismiss();
+            dialog = null ;
+        }
         Activity activity = getCurrentActivity();
         if (activity != null && options.hasKey(PICKER_DATA)) {
             View view = activity.getLayoutInflater().inflate(R.layout.picker_view, null);
@@ -459,12 +464,12 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
 
     @Override
     public void onHostPause() {
-        hide();
-        dialog = null;
+        
     }
 
     @Override
     public void onHostDestroy() {
-
+        hide();
+        dialog = null;
     }
 }
